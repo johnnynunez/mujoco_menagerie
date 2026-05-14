@@ -13,10 +13,11 @@ import mujoco
 SINGLE_ARM_XML = "wxai_follower.xml"
 BI_ARM_XML = "wxai_follower_biarm.xml"
 
-# Arm placement (copied from trossen_ai_bimanual.xml)
-LEFT_POS = [-0.4575, -0.019, 0.0]
+# Arm placement — bases are 82cm apart.
+HALF_SPACING = 0.41  # 82cm / 2
+LEFT_POS = [-HALF_SPACING, -0.019, 0.0]
 LEFT_QUAT = [1, 0, 0, 0]  # Identity rotation
-RIGHT_POS = [0.4575, -0.019, 0.0]
+RIGHT_POS = [HALF_SPACING, -0.019, 0.0]
 RIGHT_QUAT = [0, 0, 0, 1]  # 180 degree rotation around Z
 
 
