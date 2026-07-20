@@ -26,8 +26,9 @@ repository.
 
 1. Converted the URDF body tree with [`urdf-to-mjcf`](https://github.com/discoverse-dev/urdf-to-mjcf),
    using CoACD to generate convex collision meshes.
-2. Kept `gripper_end` as a separate welded body so every link retains its exact
-   URDF inertial (MuJoCo's built-in URDF importer mis-rotates the merged
+2. Kept `gripper_end` as a separate welded body and preserved all six components
+   of every URDF inertia tensor, including products of inertia (MuJoCo's built-in
+   URDF importer mis-rotates the merged
    fixed-joint inertial, which introduces a spurious ~1 N·m gravity torque at
    the wrist).
 3. Fixed the base to the world and added the base link inertial.
@@ -43,11 +44,13 @@ repository.
 
 ### Validation
 
-The generalized gravity torque g(q) was verified against Pinocchio (built from
-the same URDF) across several poses; the two agree to under 1e-5 N·m. Pinocchio
-in turn matches the NVIDIA Isaac Sim (PhysX and Newton) drive droop and the
-on-hardware measurements, so the model is dynamically consistent with the URDF,
-the vendor's Isaac Sim asset, and the physical arm.
+Mass, center of mass, and the full compiled inertia tensor were verified against
+the source URDF for all 10 bodies. The generalized gravity torque g(q) was also
+verified against Pinocchio (built from the same URDF) across several poses; the
+two agree to under 1e-5 N·m. Pinocchio in turn matches the NVIDIA Isaac Sim
+(PhysX and Newton) drive droop and the on-hardware measurements, so the model is
+dynamically consistent with the URDF, the vendor's Isaac Sim asset, and the
+physical arm.
 
 ## License
 
