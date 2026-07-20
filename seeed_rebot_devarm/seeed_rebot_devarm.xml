@@ -21,15 +21,9 @@
         <position kp="100" kv="4" forcerange="-500 500"/>
       </default>
     </default>
-    <default class="floor">
-      <geom type="plane" size="0 0 0.05" material="groundplane"/>
-    </default>
   </default>
-  <compiler angle="radian" meshdir="assets" balanceinertia="true" autolimits="true"/>
+  <compiler angle="radian" meshdir="assets" autolimits="true"/>
   <option integrator="implicitfast" cone="elliptic" impratio="10"/>
-  <visual>
-    <global offwidth="3840" offheight="2160"/>
-  </visual>
   <worldbody>
     <body name="base_link" childclass="robot" pos="0 0 0">
       <inertial pos="2.87641888266442E-06 -0.000122302488725115 0.0243376121934547" mass="1.1774"
@@ -155,14 +149,14 @@
     <mesh name="pla_right" file="pla_right.STL"/>
   </asset>
   <actuator>
-    <position class="rs06" name="joint1" joint="joint1"/>
-    <position class="rs06" name="joint2" joint="joint2"/>
-    <position class="rs06" name="joint3" joint="joint3"/>
-    <position class="rs00" name="joint4" joint="joint4"/>
-    <position class="rs00" name="joint5" joint="joint5"/>
-    <position class="rs00" name="joint6" joint="joint6"/>
-    <position class="gripper" name="joint_left" joint="joint_left"/>
-    <position class="gripper" name="joint_right" joint="joint_right"/>
+    <position class="rs06" name="joint1" joint="joint1" ctrlrange="-2.8 2.8"/>
+    <position class="rs06" name="joint2" joint="joint2" ctrlrange="-3.14 0"/>
+    <position class="rs06" name="joint3" joint="joint3" ctrlrange="-3.14 0"/>
+    <position class="rs00" name="joint4" joint="joint4" ctrlrange="-1.79 1.69"/>
+    <position class="rs00" name="joint5" joint="joint5" ctrlrange="-1.57 1.57"/>
+    <position class="rs00" name="joint6" joint="joint6" ctrlrange="-3.14 3.14"/>
+    <position class="gripper" name="joint_left" joint="joint_left" ctrlrange="0 0.05"/>
+    <position class="gripper" name="joint_right" joint="joint_right" ctrlrange="0 0.0715"/>
   </actuator>
   <keyframe>
     <key name="home" qpos="0 0 0 0 0 0 0 0" ctrl="0 0 0 0 0 0 0 0"/>

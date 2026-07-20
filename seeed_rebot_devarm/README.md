@@ -1,7 +1,7 @@
-# Seeed Studio reBot DevArm (RobStride) Description (MJCF)
+# Seeed Studio reBot DevArm Description (MJCF)
 
 > [!IMPORTANT]
-> Requires MuJoCo 2.3.3 or later.
+> Requires MuJoCo 2.3.4 or later.
 
 ## Changelog
 
@@ -33,14 +33,27 @@ repository.
    the wrist).
 3. Fixed the base to the world and added the base link inertial.
 4. Extracted joint and actuator properties into `<default>` classes.
-5. Added position-controlled actuators. Joint torque limits come from the
-   actuator ratings (RS-06: 36 N·m, RS-00: 14 N·m).
+5. Added position-controlled actuators with `ctrlrange` equal to the joint
+   limits. Joint torque limits come from the actuator ratings (RS-06: 36 N·m,
+   RS-00: 14 N·m).
 6. Added `home` and `raised` keyframes.
 7. Recovered the per-part colours (lime accent covers, black motors and
    gripper, aluminium brackets) from the mesh filenames — the source URDF
    stores every visual as flat grey.
 8. Added `scene.xml` which includes the robot, a textured ground plane, skybox
    and haze.
+
+### Known limitations
+
+Self-collision is disabled (collision geoms use `contype="0"
+conaffinity="1"`, so the robot still collides with the floor and objects).
+The collision meshes are single convex hulls per link, and these hulls
+interpenetrate at legitimate poses — the two finger hulls overlap by ~35 mm
+at the closed `home` keyframe (they separate when the gripper opens), and
+the wrist hull grazes the upper-arm hull in the `home` keyframe — so
+enabling robot–robot contacts would report the default poses as in
+collision. Re-enable self-collision only with finer collision
+geometry.
 
 ### Validation
 
@@ -54,4 +67,10 @@ physical arm.
 
 ## License
 
-This model is released under an [Apache-2.0 License](LICENSE).
+The MJCF files and the conversion work in this directory are released under an
+[Apache-2.0 License](LICENSE). The meshes and physical parameters are derived
+from the
+[Seeed-Projects/reBot-Isaacsim](https://github.com/Seeed-Projects/reBot-Isaacsim)
+repository, which currently ships no license file; their licensing is pending
+confirmation from Seeed Studio, and this directory will be updated to match
+whatever terms Seeed publishes upstream.
